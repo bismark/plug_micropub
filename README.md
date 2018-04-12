@@ -30,8 +30,8 @@ If you want `PlugMicropub` to serve only a particular route, configure your rout
 forward "/micropub",
   to: PlugMicropub,
   init_opts: [
-	handler: MyApp.MicropubHandler,
-	json_encoder: Poison
+    handler: MyApp.MicropubHandler,
+    json_encoder: Poison
   ]
 ```
 
