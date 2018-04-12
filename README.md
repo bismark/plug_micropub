@@ -17,7 +17,7 @@ plug Plug.Parsers,
 
 plug PlugMicropub,
   handler: MyApp.MicropubHandler,
-  json_decoder: Poison 
+  json_encoder: Poison 
 ```
 
 ### Forwarding
@@ -31,7 +31,7 @@ forward "/micropub",
   to: PlugMicropub,
   init_opts: [
 	handler: MyApp.MicropubHandler,
-	json_decoder: Poison
+	json_encoder: Poison
   ]
 ```
 
@@ -41,7 +41,7 @@ forward "/micropub",
 forward "/micropub",
   PlugMicropub,
   handler: MyApp.MicropubHandler,
-  json_decoder: Poison
+  json_encoder: Poison
 ```
 
 [1]: https://micropub.rocks/
