@@ -299,10 +299,7 @@ defmodule PlugMicropub do
   defp parse_create_body("application/json", params) do
     with {:ok, ["h-" <> type]} <- Map.fetch(params, "type"),
          {:ok, properties} when is_map(properties) <- Map.fetch(params, "properties") do
-      properties =
-        properties
-        |> Enum.reject(&match?({"mp-" <> _, _}, &1))
-        |> Map.new()
+      properties = Map.new(properties)
 
       {:ok, type, properties}
     else
@@ -314,7 +311,6 @@ defmodule PlugMicropub do
     with {type, params} when is_binary(type) <- Map.pop(params, "h") do
       properties =
         params
-        |> Enum.reject(&match?({"mp-" <> _, _}, &1))
         |> Enum.map(fn {k, v} -> {k, List.wrap(v)} end)
         |> Map.new()
 
