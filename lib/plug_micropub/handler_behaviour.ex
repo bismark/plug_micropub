@@ -30,14 +30,17 @@ defmodule PlugMicropub.HandlerBehaviour do
   @callback handle_undelete(url :: String.t(), access_token) ::
               :ok
               | {:ok, url :: String.t()}
-              | {:error, handler_error}
-              | {:error, handler_error, error_description :: String.t()}
+              | handler_error
 
   @callback handle_config_query(access_token) ::
               {:ok, map}
               | handler_error
 
   @callback handle_config_query(access_token) ::
+              {:ok, map}
+              | handler_error
+
+  @callback handle_syndicate_to_query(access_token) ::
               {:ok, map}
               | handler_error
 
