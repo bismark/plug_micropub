@@ -44,6 +44,10 @@ defmodule PlugMicropub.HandlerBehaviour do
               {:ok, map}
               | handler_error
 
+  @callback handle_channel_query(access_token) ::
+              {:ok, map}
+              | handler_error
+
   @callback handle_source_query(
               url :: String.t(),
               properties :: [String.t()],

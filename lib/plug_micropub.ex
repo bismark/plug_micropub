@@ -215,6 +215,15 @@ defmodule PlugMicropub do
     end
   end
 
+  defp handle_query(:channel, access_token, conn) do
+    handler = conn.private[:plug_micropub][:handler]
+
+    case handler.handle_channel_query(access_token) do
+      {:ok, content} -> send_content(conn, content)
+      error -> send_error(conn, error)
+    end
+  end
+
   defp parse_update_properties(properties) do
     properties = Map.take(properties, ["replace", "add", "delete"])
 
