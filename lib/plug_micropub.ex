@@ -122,7 +122,7 @@ defmodule PlugMicropub do
 
   defp get_query(conn) do
     case Map.fetch(conn.query_params, "q") do
-      {:ok, query} when query in ["config", "source", "syndicate-to"] ->
+      {:ok, query} when query in ["config", "source", "syndicate-to", "channel"] ->
         {:ok, String.to_existing_atom(query)}
 
       _ ->
@@ -210,6 +210,15 @@ defmodule PlugMicropub do
     handler = conn.private[:plug_micropub][:handler]
 
     case handler.handle_syndicate_to_query(access_token) do
+      {:ok, content} -> send_content(conn, content)
+      error -> send_error(conn, error)
+    end
+  end
+
+  defp handle_query(:channel, access_token, conn) do
+    handler = conn.private[:plug_micropub][:handler]
+
+    case handler.handle_channel_query(access_token) do
       {:ok, content} -> send_content(conn, content)
       error -> send_error(conn, error)
     end
