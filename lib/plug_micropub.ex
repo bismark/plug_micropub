@@ -122,7 +122,7 @@ defmodule PlugMicropub do
 
   defp get_query(conn) do
     case Map.fetch(conn.query_params, "q") do
-      {:ok, query} when query in ["config", "source", "syndicate-to"] ->
+      {:ok, query} when query in ["config", "source", "syndicate-to", "channel"] ->
         {:ok, String.to_existing_atom(query)}
 
       _ ->
